@@ -56,4 +56,4 @@ dependencies = [
 package-dir = {"" = "src"}
 
 [tool.cibuildwheel]
-skip = ["pp*", "*i686"]
+before-build = "pip install numpy -C-Dallow-noblas=true"
