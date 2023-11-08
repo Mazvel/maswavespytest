@@ -6,6 +6,9 @@ on:
     branches:
       - main
 
+permissions:
+  id-token: write
+
 jobs:
   build_wheels:
     name: Build wheels on ${{ matrix.os }}
@@ -26,13 +29,7 @@ jobs:
     - name: Build wheels
       run: python -m cibuildwheel --output-dir dist
 
-  deploy:
-    name: Publish package distributions to TestPyPI
-    runs-on: ubuntu-latest
-    permissions:
-      id-token: write
-    steps:
-    - name: Public wheels to PyPI test
+    - name: Publish wheels to PyPI test
       uses: pypa/gh-action-pypi-publish@release/v1
       with:
         repository-url: https://test.pypi.org/legacy/
