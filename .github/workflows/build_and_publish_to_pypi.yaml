@@ -6,28 +6,45 @@ on:
     branches:
       - main
 
-permissions:
-  id-token: write
-
 jobs:
   build_wheels:
     name: Build wheels on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-22.04, windows-2022, macos-11]
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
 
+    - name: Build wheels
+      uses: pypa/cibuildwheel@v2.16.2
+
+    - uses: actions/upload-artifact@v3
+      with:
+        path: ./wheelhouse/*.whl
+
+  upload_pypi:
+    needs: [build_wheels]
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      id-token: write
+
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          # unpacks default artifact into dist/
+          # if `name: artifact` is omitted, the action will create extra parent dir
+          name: artifact
+          path: dist
+
+
     - name: Set up Python
       uses: actions/setup-python@v3
       with:
         python-version: '3.11'
-
-    - name: Install cibuildwheel
-      run: python -m pip install cibuildwheel==2.16.2
-
-    - name: Build wheels
-      run: python -m cibuildwheel --output-dir dist
 
     - name: Publish wheels to PyPI test
       uses: pypa/gh-action-pypi-publish@release/v1
