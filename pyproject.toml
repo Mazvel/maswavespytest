@@ -29,7 +29,7 @@ dependencies = [
   "kiwisolver==1.4.5",
   "lxml==4.9.3",
   "matplotlib==3.8.1",
-  "numpy==1.25.2",
+  "numpy==1.26.1",
   "obspy==1.4.0",
   "packaging==23.2",
   "pandas==2.1.2",
@@ -54,3 +54,6 @@ dependencies = [
 
 [tool.setuptools]
 package-dir = {"" = "src"}
+
+[tool.cibuildwheel]
+skip = ["pp*", "*i686"]
