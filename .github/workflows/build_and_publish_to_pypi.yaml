@@ -6,6 +6,9 @@ on:
     branches:
       - main
 
+permissions:
+  id-token: write
+
 jobs:
   build_wheels:
     name: Build wheels on ${{ matrix.os }}
@@ -29,23 +32,16 @@ jobs:
     needs: build_wheels
     runs-on: ubuntu-latest
     environment: pypi
-    permissions:
-      id-token: write
 
     steps:
-      - uses: actions/download-artifact@v3
-        with:
-          # unpacks default artifact into dist/
-          # if `name: artifact` is omitted, the action will create extra parent dir
-          name: artifact
-          path: dist
-
-
-    - name: Set up Python
-      uses: actions/setup-python@v3
+    - name: Download packages
+      uses: actions/download-artifact@v3
       with:
-        python-version: '3.11'
-
+        # unpacks default artifact into dist/
+        # if `name: artifact` is omitted, the action will create extra parent dir
+        name: artifact
+        path: dist
+  
     - name: Publish wheels to PyPI test
       uses: pypa/gh-action-pypi-publish@release/v1
       with:
