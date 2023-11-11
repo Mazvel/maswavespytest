@@ -48,6 +48,13 @@ dependencies = [
   "urllib3"
 ]
 
+[project.optional-dependencies]
+test = [
+    "pytest",
+    "pytest-cov"
+]
+
+
 [project.urls]
 "Homepage" = "https://github.com/Mazvel/maswavespytest"
 "Bug Tracker" = "https://github.com/Mazvel/maswavespytest/issues"
