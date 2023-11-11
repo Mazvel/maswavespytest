@@ -1,6 +1,6 @@
 # MaswavesPy
 
-MaswavesPy is a Python package for processing and inverting MASW data.
+MaswavesPy is a Python package for processing and inverting MASW data. MASWaves (Multichannel Analysis of Surface Waves for assessing shear wave velocity profiles of soils) is an open source software, developed at the Faculty of Civil and Environmental Engineering, University of Iceland, for processing and analyzing multichannel surface wave records using MASW. 
 
 ## Installatilion
 
