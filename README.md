@@ -8,6 +8,16 @@ MaswavesPy is a Python package for processing and inverting MASW data. MASWaves 
 
 Wheels for Windows, Linux and Mac distributions can also be downloaded from [pypi](https://test.pypi.org/project/maswavespytest/#files).
 
+## Requirements
+
+To build the package on Windows you need Microsoft C++ Build Tools. You can download an installer from Microsoft at this [link](https://visualstudio.microsoft.com/visual-cpp-build-tools/). Otherwise you will see error:
+```
+error: Microsoft Visual C++ 14.0 or greater is required. Get it with "Microsoft C++ Build Tools": https://visualstudio.microsoft.com/visual-cpp-build-tools/
+```
+For more information you can view this Stackoverflow [answer](error: Microsoft Visual C++ 14.0 or greater is required. Get it with "Microsoft C++ Build Tools": https://visualstudio.microsoft.com/visual-cpp-build-tools/)
+
+This is required because the package uses Cython for some of its calculations.
+
 ## Quick Start
 
 In the [examples](https://github.com/Mazvel/maswavespytest/tree/main/examples) directory you can see some examples. It uses data from the [examples/Data](https://github.com/Mazvel/maswavespytest/tree/main/examples/Data) directory for the calculations.
