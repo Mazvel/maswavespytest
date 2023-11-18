@@ -42,7 +42,6 @@ dependencies = [
   "scipy >= 1.0, < 2",
   "six",
   "SQLAlchemy",
-  "table",
   "tk",
   "typing_extensions",
   "tzdata",
