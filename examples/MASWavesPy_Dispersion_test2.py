@@ -41,10 +41,6 @@ How to run setup.py:
 3) Execute the following command: python maswavespy/setup.py build_ext --inplace
     
 """
-from sys import platform as sys_pf
-if sys_pf == 'darwin':
-    import matplotlib
-    matplotlib.use("TkAgg")
 from maswavespy import dataset
 
 # ------ Dispersion processing: Batch import seismic data from a .csv file ------
@@ -78,12 +74,14 @@ TestSite = dataset.Dataset(site, profile, date, fs, f_pick_min)
 import_format = 'textfile' 
 csv_file = 'Data/Oysand_example_dataset.csv' # Path of .csv file
 TestSite.records_from_csv(import_format, csv_file)       
+print('IDs of records in the database:')
 print(TestSite.records.keys()) # IDs of records in the database 
 
 #%%
 # Remove a record from an initiated Dataset object.
 record_id_to_delete = 'r4'
 TestSite.delete_record(record_id_to_delete)
+print('IDs of records in the database:')
 print(TestSite.records.keys())
 
 #%%
@@ -96,6 +94,7 @@ dx = 2                # Receiver spacing [m]
 x1 = 30               # Source offset [m]
 fs = 1000             # Sampling frequency [Hz]
 TestSite.add_from_textfile(record_id_to_add, file_name, header_lines, n, direction, dx, x1)
+print('IDs of records in the database:')
 print(TestSite.records.keys())
 
 #%%

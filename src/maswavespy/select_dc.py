@@ -268,6 +268,9 @@ class SelectDC(tk.Frame):
         Add widgets for identifying (picking) dispersion curves using window 
         selection and/or spectral maxima ID numbers.
 
+    _close_window(self)
+        Close the GUI for dispersion curve selection.   
+
     _get_maxima(self)
         Find spectral maxima inside a selection window.
 
@@ -405,10 +408,21 @@ class SelectDC(tk.Frame):
         """
         btn_close = tk.Button(frame, text='Close', font=('DejaVu Sans', 10, 'bold'), 
                               foreground='black', height=1, width=7,
-                              command=self.master.destroy)
+                              command=self._close_window)
         btn_close.grid(row=1, column=0, sticky='w', padx=3, pady=6)
     
     
+    def _close_window(self):
+        print("GUI for dispersion curve selection has been closed.")
+        if self.elementdc.f0 is None:
+            print("No dispersion curve data points have been saved. \n")        
+        elif len(self.elementdc.f0) > 0:
+            print(str(len(self.elementdc.f0)) + " dispersion curve data points have been selected and saved to the ElementDC object. \n")
+        else:
+            print("No dispersion curve data points have been saved. \n")
+        self.master.destroy()
+        
+        
     def message_to_user(self, message):
         
         """
@@ -463,8 +477,12 @@ class SelectDC(tk.Frame):
         self.canvas.draw()
         
         # Print instructions
-        start_message = ('Start the dispersion curve identification. \n'
-            ' - The spectral maximum at each frequency is shown as a black dot. \n \n \n \n \n \n')
+        start_message = ('Dispersion curve identification. \n'
+            'The spectral maximum at each frequency is shown as a black dot on the dispersion image, each with its unique \n'
+            'Point ID (spectral maxima identification number). \n \n'
+            'The dispersion curve is extracted by selecting the relevant spectral maxima using their Point IDs (recommended). Press START (Pick dispersion curve using Point IDs) to commence. \n \n'
+            'Additional points can be added to the identified dispersion curve by clicking on the dispersion image. \n'
+            'Press START (Pick dispersion curve by clicking on the image) to commence.')
         self.message_to_user(start_message)
  
     
@@ -479,7 +497,7 @@ class SelectDC(tk.Frame):
         
         """        
         while len(self.ax0.patches) > 0:
-            self.ax0.patches.pop()
+            self.ax0.patches[-1].remove()
         self.rect = Rectangle((0.0,0.0), 0.0, 0.0, fill=False, edgecolor='white', linewidth=1, linestyle='dashed')
         self.ax0.add_patch(self.rect)
         
@@ -694,7 +712,7 @@ class SelectDC(tk.Frame):
     
         if n0:
             if min(n0) < 0 or max(n0) >= len(self.elementdc.Amax[0]):
-                message = f'Entered ID numbers must be between 0 and {len(self.elementdc.Amax[0])-1} (inclusive).'
+                message = f'Entered Point IDs must be between 0 and {len(self.elementdc.Amax[0])-1} (inclusive).'
                 raise ValueError(message)
     
         return sorted(n0)
@@ -732,7 +750,7 @@ class SelectDC(tk.Frame):
                                 highlightthickness=1, padx=3, pady=3)
         frm_pointIDs.grid(row=1, column=1, rowspan=2, columnspan=3, sticky='w')        
         lbl_pointIDs = tk.Label(frm_pointIDs, font=('DejaVu Sans', 10, 'bold'),
-                                text='Pick dispersion curve \n using spectral maxima IDs',
+                                text='Pick dispersion curve \n using Point IDs',
                                 background='gray85', borderwidth=5)
         lbl_pointIDs.grid(row=0, column=0, columnspan=3, padx=3, pady=3)
         
@@ -757,7 +775,7 @@ class SelectDC(tk.Frame):
             
         """   
         self.display_labels = tk.IntVar()
-        self.ids_labels = tk.Checkbutton(frame, text='Show spectral maxima ID numbers (point IDs).', font=('DejaVu Sans', 9, 'bold'), 
+        self.ids_labels = tk.Checkbutton(frame, text='Show Point IDs (spectral maxima ID numbers).', font=('DejaVu Sans', 9, 'bold'), 
                                          variable=self.display_labels, command=self.view_hide_labels)
         self.ids_labels.grid(row=1, column=1, sticky='w')
     
@@ -765,7 +783,7 @@ class SelectDC(tk.Frame):
     def view_hide_labels(self):
         
         """
-        Show/hide spectral maxima ID numbers (point IDs).
+        Show/hide spectral maxima ID numbers (Point IDs).
         
         """
         # Show labels
@@ -804,7 +822,7 @@ class SelectDC(tk.Frame):
     def entry_pointIDs(self, frame):
         
         """
-        Create an entry widget for selection of spectral maxima IDs.
+        Create an entry widget for selection of Point IDs (spectral maxima IDs).
         
         Parameters
         ----------
@@ -834,7 +852,7 @@ class SelectDC(tk.Frame):
         self.rect_end = (0.0, 0.0)
                   
         while len(self.ax0.patches) > 0:
-            self.ax0.patches.pop()
+            self.ax0.patches[-1].remove()
         self.rect = Rectangle((0.0,0.0), 0.0, 0.0, fill=False, edgecolor='white', linewidth=1, linestyle='dashed')
         self.ax0.add_patch(self.rect)
         
@@ -853,7 +871,7 @@ class SelectDC(tk.Frame):
             - Deselect the last set of spectral maxima.
             - Remove the last set of spectral maxima from the dispersion image.
             - Update the point IDs entry widget.
-            
+                       
             """
             # Left mouse button: Start selecting points
             if event.inaxes is self.ax0 and event.button == 1:
@@ -885,19 +903,25 @@ class SelectDC(tk.Frame):
                 # Update the dispersion image
                 self.canvas.draw()
 
-            # Middle mouse button: Pause 
-            if event.button == 2:
+        def on_pressing_p_key(event):
+            
+            """
+            Press p (lower case) or P (upper case) on keyboard.
+            - Pause selection of spectral maxima using the window selection tool.
+            
+            """
+            if event.key =='p' or event.key == 'P':
                 # Print instructions
-                window_pause_message = ('Selection of spectral maxima using the window selection tool has been paused. \n' 
-                                        ' - Press START to resume. \n \n \n \n \n \n')
+                window_pause_message = ('Selection of Point IDs using the window selection tool has been paused. \n' 
+                                        ' - Press START to resume. \n \n \n \n \n \n \n')
                 self.message_to_user(window_pause_message)
                 
                 # Disconnect events
                 self.canvas.mpl_disconnect(self.cid_window_start)
                 self.canvas.mpl_disconnect(self.cid_window_update)
                 self.canvas.mpl_disconnect(self.cid_window_quit)
-
-
+                self.canvas.mpl_disconnect(self.cid_window_pause)
+                
         def on_motion(event):
             
             """
@@ -919,15 +943,14 @@ class SelectDC(tk.Frame):
                 
                 # Update the dispersion image
                 self.canvas.draw()
-          
-                
+                         
         def on_btn_release(event):            
             
             """
             Release left mouse button
             - Select spectral maxima inside a selection window.
             - Plot selected spectral maxima on top of dispersion image.
-            - Get point IDs and write to entry widget.
+            - Get Point IDs and write to entry widget.
         
             """
             # Left mouse button: Select points
@@ -963,12 +986,13 @@ class SelectDC(tk.Frame):
         self.cid_window_start = self.canvas.mpl_connect('button_press_event', on_btn_press)
         self.cid_window_update = self.canvas.mpl_connect('motion_notify_event', on_motion)
         self.cid_window_quit = self.canvas.mpl_connect('button_release_event', on_btn_release)
-
+        self.cid_window_pause = self.canvas.mpl_connect('key_press_event',on_pressing_p_key)
+    
     
     def select_pointIDs(self):
         
         """
-        Select spectral maxima by entering spectral maxima IDs (point IDs)
+        Select spectral maxima by entering Point IDs (spectral maxima IDs)
         in an entry widget. 
         
         """          
@@ -976,7 +1000,7 @@ class SelectDC(tk.Frame):
 
             """
             Press the enter/return key
-            - Select the spectral maxima that correspond to the entered point IDs.
+            - Select the spectral maxima that correspond to the entered Point IDs.
 
             """
             # Get spectral maxima IDs (point IDs)
@@ -1018,7 +1042,7 @@ class SelectDC(tk.Frame):
         
         Enter spectral maxima IDs as a comma-separated list (e.g., 1,2,5,7,3,10). 
         To select all IDs from x to y (inclusive), the selection can be entered as x-y 
-        (e.g., enter 1-3,7,9-11 to select spectral maxima IDs no. 1,2,3,7,9,10,11).
+        (e.g., enter 1-3,7,9-11 to select Point IDs no. 1,2,3,7,9,10,11).
         
         """     
         # Deactivate dispersion curve selection using mouse click events (if already activated)
@@ -1026,14 +1050,14 @@ class SelectDC(tk.Frame):
             self.canvas.mpl_disconnect(self.cid_mouse)
           
         # Print instructions
-        ids_start_message = ('Window selection: \n'
+        ids_start_message = ('Window selection tool: \n'
             ' - Left-click at any point on the dispersion image and drag the cursor to include the maxima in the selection window.\n'
-            ' - To pause the window selection, press the middle mouse button (e.g., to zoom in/out). \n'
-            'Spectral maxima IDs (point IDs): \n'
-            ' - Enter point IDs as a comma-separated list (e.g., 1,2,5,7,3,10) and press the return/enter key.\n'
+            ' - To pause the window selection (e.g., to zoom in/out), press P. \n'
+            'Type Point IDs: \n'
+            ' - Enter Point IDs as a comma-separated list (e.g., 1,2,5,7,3,10) and press the return/enter key.\n'
             ' - To select all IDs from x to y (inclusive), the selection can be entered as x-y (e.g., 1-3,7 to select IDs 1,2,3,7).\n'
             'Right-click at any point on the dispersion image to deselect the last set of spectral maxima. \n'
-            'Selected points are indicated by white dots. Press STOP to stop selecting spectral maxima.')
+            'Selected points are shown as white dots. Press STOP to stop selecting Point IDs. Press RESET to reset the selection. \n')
         self.message_to_user(ids_start_message)
 
         # Label spectral maxima
@@ -1089,12 +1113,14 @@ class SelectDC(tk.Frame):
         
         """
         # Print instructions
-        ids_reset_message = ('Current selection of spectral maxima has been cleared.\n '
-            '- Press START to restart the selection. \n \n \n \n \n \n')            
+        ids_reset_message = ('Current selection of spectral maxima (Point IDs) has been cleared.\n '
+            '- Press START to restart the dispersion curve identification. \n \n \n \n \n \n \n')            
         self.message_to_user(ids_reset_message)
         
         # Clear current selection and deactive the entry widget
         self.dc_ids = None
+        if self.ids_entry.cget('state') == 'disabled':
+            self.ids_entry.configure(state='normal')
         self.ids_entry.delete(0, 'end')
         self.ids_entry.configure(state='disabled')
         
@@ -1147,10 +1173,10 @@ class SelectDC(tk.Frame):
                        
         """ 
         # Print instructions
-        IDs_stop_message = ('The selection of spectral maxima is currently paused. \n'
+        IDs_stop_message = ('The selection of spectral maxima is currently stopped. \n'
             ' - Press START to resume or alter the current selection. \n \n'
-            'Press SAVE AND VIEW DISPERSION CURVE to complete the dispersion curve picking '
-            'and view the identified experimental dispersion curve. \n \n \n')
+            'Press SAVE DISPERSION CURVE to complete the dispersion curve picking '
+            'and view the identified experimental dispersion curve. \n \n \n \n')
         self.message_to_user(IDs_stop_message)
         
         # Deactive the entry widget
@@ -1246,15 +1272,15 @@ class SelectDC(tk.Frame):
         self.canvas.draw()
         
         # Print instructions
-        clicks_start_message = ('Start selection of spectral maxima. \n' 
+        clicks_start_message = ('Start selection of dispersion curve data points. \n' 
             ' - Use the left mouse button to select points. Selected points '
             'are indicated by white dots at the location of each click. \n'
             ' - Use the right mouse button to deselect the last selected point. \n'
-            ' - Press the middle mouse button to pause the selection of spectral maxima (e.g., to zoom in/out). \n'
-            ' - Press STOP to stop the selection. \n \n \n')
+            ' - Press P to pause the selection (e.g., to zoom in/out). \n'
+            ' - Press STOP to stop the selection. \n'
+            ' - Press RESET to reset the selection. \n \n \n')
         self.message_to_user(clicks_start_message)   
-        
-        
+               
         def on_click(event):
             
             """ 
@@ -1265,10 +1291,7 @@ class SelectDC(tk.Frame):
             Right mouse button:
             - Remove x- and y-coordinates of the last selected point from lists.
             - Remove the last selected point from the dispersion image.
-            
-            Middle mouse button:
-            - Pause the selection of spectral maxima.
-            
+           
             """            
             # Left mouse button: Select points
             if event.inaxes is self.ax0 and event.button == 1:
@@ -1284,20 +1307,27 @@ class SelectDC(tk.Frame):
                     self.dc_clicks[1].pop()
                     self.ax0.paths_clicks.pop().remove()
                     self.canvas.draw()
-                
-            # Middle mouse button: Pause 
-            if event.button == 2:
+                        
+        def on_p_key(event):
+            
+            """
+            Press p (lower case) or P (upper case) on keyboard:
+            - Pause the selection of dispersion curve data points.
+            
+            """            
+            if event.key =='p' or event.key == 'P':
                 # Print instructions
-                clicks_pause_message = ('Selection of spectral maxima has been paused. \n' 
-                                        ' - Press START to resume. \n \n \n \n \n \n')
+                clicks_pause_message = ('Selection of dispersion curve data points has been paused. \n' 
+                                        ' - Press START to resume. \n \n \n \n \n \n \n')
                 self.message_to_user(clicks_pause_message)
                 
                 if hasattr(self, 'cid_mouse'):
                     self.canvas.mpl_disconnect(self.cid_mouse)
-                        
-                  
-        self.cid_mouse = self.canvas.mpl_connect('button_press_event', on_click)
+                    self.canvas.mpl_disconnect(self.cid_p_key)                   
         
+        self.cid_mouse = self.canvas.mpl_connect('button_press_event', on_click)
+        self.cid_p_key = self.canvas.mpl_connect('key_press_event',on_p_key)
+
             
     def btn_click_events_reset(self, frame):
         
@@ -1324,8 +1354,8 @@ class SelectDC(tk.Frame):
         
         """
         # Print instructions
-        clicks_reset_message = ('Current selection has been cleared. \n'
-            '- Press START to restart selection of spectral maxima by clicking on the dispersion image.'
+        clicks_reset_message = ('Current selection of disperson curve data points has been cleared. \n'
+            '- Press START to restart the dispersion curve identification. \n'
             '\n \n \n \n \n \n')            
         self.message_to_user(clicks_reset_message)
         
@@ -1374,10 +1404,10 @@ class SelectDC(tk.Frame):
                        
         """                  
         # Print instructions
-        clicks_stop_message = ('The selection of spectral maxima is currently paused. \n'
+        clicks_stop_message = ('The selection of dispersion curve data points is currently stopped. \n'
             ' - Press START to select additional points or to alter the currenct selection. \n \n'
-            'Press SAVE AND VIEW DISPERSION CURVE to complete the dispersion curve picking '
-            'and view the identified experimental dispersion curve. \n \n \n')
+            'Press SAVE DISPERSION CURVE to complete the dispersion curve picking '
+            'and view the identified experimental dispersion curve. \n \n \n \n')
         self.message_to_user(clicks_stop_message)
         
         # Update the dispersion image
@@ -1440,7 +1470,7 @@ class SelectDC(tk.Frame):
         # Print instructions
         save_message = ('The selected dispersion curve has been saved to the elementary dispersion curve object. \n' 
              'The saved dispersion curve data points are indicated by black dots. \n \n'
-             'Press CLOSE to close the dispersion curve identification window. \n \n \n \n')
+             'Press CLOSE to close the dispersion curve identification window. \n \n \n \n \n')
         self.message_to_user(save_message)       
         
         # Data points identified using window selection and/or based on spectral maxima IDs

@@ -29,7 +29,7 @@ Dispersion curve combination
  - Olafsdottir, E.A., Bessason, B. and Erlingsson, S. (2018b). Combination of 
    dispersion curves from MASW measurements. Soil Dynamics and Earthquake 
    Engineering 113: 473–487. https://doi.org/10.1016/j.soildyn.2018.05.025
-   
+
 """
 
 import numpy as np
@@ -373,7 +373,9 @@ class CombineDCs():
         ref = np.nonzero(cov)
         self.cov = (f_unique[0][ref], mean_c[ref], std_c[ref], cov[ref])
         
-        
+        print("Mean and std DCs (frequency domain) computed.")
+
+
     def plot_dc_cov(self, figwidth=14, figheight=12, col='navy', alpha=0.6, **kwargs):
         
         """
@@ -595,7 +597,9 @@ class CombineDCs():
             self.data_points['c'] = [i for i in DataPoints_c if i is not None]
             self.data_points['wavelength'] = [i for i in DataPoints_lambda if i is not None]
     
-    
+        print("Composite DC (wavelength domain) computed with a = " + str(a) + ".")
+
+
     def plot_combined_dc(self, plot_all=False, figwidth=8 , figheight=12, col='navy', pointcol='darkgray'):
         
         """
@@ -704,8 +708,18 @@ class CombineDCs():
                 Lower boundary Rayleigh wave velocity [m/s].
             resampled['wavelength'] : numpy.ndarray            
                 Wavelength [m].
+
+        Raises
+        ------
+        ValueError
+            If 'space' is not specified as 'log' or 'linear'
             
-        """        
+        """
+        spaces = ['log', 'linear']
+        if space.lower() not in spaces:
+            message = f'space must be specified as ´log´ or ´linear´, not as ´{space}´'
+            raise ValueError(message)
+
         f_dc_mean = interp1d(np.round(self.combined['wavelength'],4), self.combined['c_mean'], kind='linear')
         f_dc_low = interp1d(np.round(self.combined['wavelength'],4), self.combined['c_low'], kind='linear')
         f_dc_up = interp1d(np.round(self.combined['wavelength'],4), self.combined['c_up'], kind='linear')
@@ -714,8 +728,10 @@ class CombineDCs():
         wavelength_max = self._check_wavelength(wavelength_max, 'max')
         if space.lower() == 'log':
             lambda_interp = np.round(np.geomspace(wavelength_min, wavelength_max, num=no_points, endpoint=True),4)
+            space_print = ' logarithmically spaced'
         elif space.lower() == 'linear':
             lambda_interp = np.round(np.linspace(wavelength_min, wavelength_max, num=no_points, endpoint=True),4)
+            space_print = ' linearly spaced'
 
         self.resampled['wavelength'] = lambda_interp
         self.resampled['c_mean'] = f_dc_mean(lambda_interp)
@@ -733,12 +749,14 @@ class CombineDCs():
                      markerfacecolor='None', markeredgecolor='red')
             plt.legend(loc='lower left', frameon=False)
     
-            
+        print('Composite DC (wavelength domain) resampled at ' + str(no_points) + space_print + ' points between wavelengths of ' + str(wavelength_min) + ' m and ' + str(wavelength_max) + ' m.')
+
+   
     def _check_wavelength(self, wavelength, boundary):
         
         """
         Check boundary (min and max) wavelength values for resampled DC.
-        
+
         Parameters
         ----------
         wavelength : 'default', float or int
@@ -746,12 +764,12 @@ class CombineDCs():
         boundary : 'min' or 'max'
             - boundary = 'min' to check the lower boundary wavelength value of the resampled DC.
             - boundary = 'max' to check the upper boundary wavelength value of the resampled DC.     
-        
+
         Returns
         -------
         wavelength_value : float or int
             Checked wavelength value.
-        
+
         Raises
         ------
         ValueError
@@ -769,7 +787,7 @@ class CombineDCs():
         else:
             message = 'Please check the wavelength boundaries (wavelength_min and wavelength_max). They must be specified as ´default´ or be given a numerical value.'
             raise ValueError(message)
-        
+
         # Ensure that numerically specified wavelength_values fall within the range of 
         # [combined['wavelength'][0], combined['wavelength'][-1]].
         if boundary == 'min':
@@ -782,5 +800,5 @@ class CombineDCs():
                 max_value = max(np.round(self.combined['wavelength'],4))
                 message = f'The value specified for ´wavelength_max´ is outside the wavelength range of the calculated composite DC. Its maximum wavelength is {max_value} m.'
                 raise ValueError(message)               
-            
+
         return wavelength_value

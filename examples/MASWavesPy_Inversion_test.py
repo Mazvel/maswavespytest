@@ -55,10 +55,6 @@ Inversion scheme
    Explorations. Geosciences, 10(8), 322. https://doi.org/10.3390/geosciences10080322
     
 """
-from sys import platform as sys_pf
-if sys_pf == 'darwin':
-    import matplotlib
-    matplotlib.use("TkAgg")
 from maswavespy import inversion
 
 import pandas as pd
@@ -215,12 +211,14 @@ layer_parameter = 'z'
 # Median Vs profile
 Vsz_median = inv_TestSite.compute_vsz(depth, TestSite_median_profile['beta'], 
                                       TestSite_median_profile['z'], layer_parameter)
-print(Vsz_median[0])
-print([round(val, 2) for val in Vsz_median[1]])
+print('Median Vs profile, z and Vsz values')
+print(Vsz_median[0]) # Depths (z)
+print([round(val, 2) for val in Vsz_median[1]]) # Computed Vsz values
 
 # Lowest-misfit Vs profile
 Vsz_lowest_misfit = inv_TestSite.compute_vsz(depth, inv_TestSite.selected['beta'][-1], 
                                              inv_TestSite.selected['z'][-1], layer_parameter)
-print(Vsz_lowest_misfit[0])
-print([round(val, 2) for val in Vsz_lowest_misfit[1]])
+print('Lowest-misfit Vs profile, z and Vsz values')
+print(Vsz_lowest_misfit[0]) # Depths (z)
+print([round(val, 2) for val in Vsz_lowest_misfit[1]]) # Computed Vsz values
 

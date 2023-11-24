@@ -421,6 +421,7 @@ class ElementDC():
             Upper limit of frequency axis [Hz].   
 
         """          
+        print("A GUI for dispersion curve selection has been opened in a separate window. \n")
         # Open GUI
         app = SelectDC(self, f_min, f_max, master=tk.Tk())
         app.mainloop()
