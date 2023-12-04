@@ -37,7 +37,7 @@ This is required because the package uses [Cython](https://cython.org/) for some
    - Make sure that the newest version of `conda` is installed. Update conda by typing `conda update conda`.
    - Navigate back to the previous folder.
    - Get your python version (3.x.yy) by typing `python -V`.
-   - Set up a virtual environment (here named `testenv`) and install the anaconda package to it by typing `conda create --name testenv python=3.x anaconda` (where 3.x is replaced by the python version that you have/want to use).
+   - Set up a virtual environment (here named `testenv`) by typing `conda create --name testenv python=3.x` (where 3.x is replaced by the python version that you have/want to use).
    - Activate the virtual environment by typing `conda activate testenv`. To see a list of available environments, type `conda info --envs`.
    - Install [spyder](https://www.spyder-ide.org/) into the virtual environment by typing `conda install spyder`.
 
