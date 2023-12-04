@@ -16,13 +16,13 @@ MASWavesPy is developed using the [Anaconda distribution](https://www.anaconda.c
 
 ## Requirements
 
-To build the package on Windows you need Microsoft C++ Build Tools. You can download an installer from Microsoft at this [link](https://visualstudio.microsoft.com/visual-cpp-build-tools/). Otherwise you will see error:
+To build the package on Windows you need Microsoft C++ Build Tools. You can download an installer from Microsoft at this [link](https://visualstudio.microsoft.com/visual-cpp-build-tools/). Otherwise you will see an error:
 ```
 error: Microsoft Visual C++ 14.0 or greater is required. Get it with "Microsoft C++ Build Tools": https://visualstudio.microsoft.com/visual-cpp-build-tools/
 ```
 For more information you can view this Stackoverflow [answer](error: Microsoft Visual C++ 14.0 or greater is required. Get it with "Microsoft C++ Build Tools": https://visualstudio.microsoft.com/visual-cpp-build-tools/)
 
-This is required because the package uses Cython for some of its calculations.
+This is required because the package uses [Cython](https://cython.org/) for some of its calculations.
 
 ## Quick Start
 
