@@ -50,13 +50,13 @@ The package is installed using [pip](https://pip.pypa.io/en/stable/).
 
 ### Test MASWavesPy
 
-1. Download the contents of the [examples](https://github.com/Mazvel/maswavespytest/tree/main/examples) directory. Four example files to test different parts/commands of the MASWavesPy package are provided. The example files use data from the [examples/Data](https://github.com/Mazvel/maswavespytest/tree/main/examples/Data) directory. Further information is provided in each file. 
-2. Launch Spyder (testenv) from the Start menu (i.e., Spyder (name of your virtual environment)).
-   - Please note that all four example files are written to be run one cell at a time using the keyboard shortcut (Ctrl+Enter), Run > Run cell, or the Run cell button in the toolbar.
-3. Open `MASWavesPy_Dispersion_test1.py` to test the basic methods of the `maswavespy.wavefield` and `maswavespy.dispersion` modules using a single data file.
-4. Open `MASWavesPy_Dispersion_test2.py` to test the methods of the `maswavespy.wavefield` and `maswavespy.dispersion` modules using a `Dataset` object.
-5. Open `MASWavesPy_Combination_test.py` to test the `maswavespy.combination` module.
-6. Open `MASWavesPy_Inversion_test.py` to test the `maswavespy.inversion` module.
+1. Download the contents of the [examples](https://github.com/Mazvel/maswavespytest/tree/main/examples) directory. Four example files to test different parts/commands of the MASWavesPy package are provided. The example files use data from the [examples/Data](https://github.com/Mazvel/maswavespytest/tree/main/examples/Data) directory. Further information is provided in each file. Please note that all four example files are written to be run one cell at a time using the keyboard shortcut (Ctrl+Enter), Run > Run cell, or the Run cell button in the toolbar.
+2. Launch `Spyder (testenv)` from the Start menu (i.e., Spyder (name of your virtual environment)).
+   - Make sure that the directory that contains the example `.py` files and the `Data` directory is set as the working directory in Spyder (testenv).
+4. Open `MASWavesPy_Dispersion_test1.py` to test the basic methods of the `maswavespy.wavefield` and `maswavespy.dispersion` modules using a single data file.
+5. Open `MASWavesPy_Dispersion_test2.py` to test the methods of the `maswavespy.wavefield` and `maswavespy.dispersion` modules using a `Dataset` object.
+6. Open `MASWavesPy_Combination_test.py` to test the `maswavespy.combination` module.
+7. Open `MASWavesPy_Inversion_test.py` to test the `maswavespy.inversion` module.
 
 ### Deactivate the virtual environment (if a virtual environment has been created)
 
