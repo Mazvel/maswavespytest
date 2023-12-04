@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Test MASWavesPy Redord and MASWavesPy Dispersion (1)
+Test MASWavesPy wavefield, dispersion and select_dc modules (1)
 
 This example covers the following:
 - Import multi-channel seismic data from text files or waveform files 
