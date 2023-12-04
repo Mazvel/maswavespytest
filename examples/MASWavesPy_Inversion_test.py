@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Test MASWavesPy Inversion
+Test MASWavesPy inversion module
 
 This example covers the use of InvertDC objects to:
 - Initialize an inversion object. 
@@ -17,31 +17,6 @@ This example covers the use of InvertDC objects to:
   - Identify the 10 lowest-misfit shear wave velocity profiles whose associated
     dispersion curves fall within the boundaries of the experimental data.
   - Compute the time-averaged shear wave velocity down to a depth z. 
-
-
-The following packages are required:
-- numpy 
-- matplotlib
-- warnings
-- copy
-- pickle
-- pandas (to run this example)
-
-Please note that before start using MASWavesPy, it may be neccessary to compile 
-the provided pyx files (i.e., compile the cython code used to conduct the 
-dispersion processing). See further: http://docs.cython.org/en/stable/src/quickstart/build.html
-Please also note that both the provided pyx files must be compiled. 
-
-A setuptools setup.py is provided with the MASWavesPy package. It is recommended
-to use it to build the cython code. Note that running setup.py requires the following 
-packages:
-- distutils
-- Cython
-
-How to run setup.py:
-1) Open the terminal
-2) Navigate to the folder MASWavesPy_master
-3) Execute the following command: python maswavespy/setup.py build_ext --inplace
     
 References
 ----------
