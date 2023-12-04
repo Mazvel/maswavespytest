@@ -24,7 +24,7 @@ For more information you can view this Stackoverflow [answer](error: Microsoft V
 
 This is required because the package uses [Cython](https://cython.org/) for some of its calculations.
 
-## Quick Start
+## Quick Start (for Windows)
 
 ### Installation and setup
 
