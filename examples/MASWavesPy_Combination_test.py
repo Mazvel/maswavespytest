@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Test MASWavesPy Combination
+Test MASWavesPy combination module
 
 This example covers the use of CombineDCs objects to:
 - Initialize a CombineDCs object.
@@ -9,14 +9,6 @@ This example covers the use of CombineDCs objects to:
 - Evaluate a compusite dispersion curve for the dataset following the 
   procedure described in Olafsdottir et al. (2018).
 - Resample composite experimental dispersion curves.
-
-
-The following packages are required:
-- numpy
-- matplotlib
-- scipy
-- csv (to run this example)
-
 
 References
 ----------
