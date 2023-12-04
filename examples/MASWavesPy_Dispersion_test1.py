@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 """
-Test MASWavesPy wavefield, dispersion and select_dc modules (1)
+Test MASWavesPy wavefield and dispersion modules (1)
 
 This example covers the following:
 - Import multi-channel seismic data from text files or waveform files 
   (one file for each record). Note that when working with large datasets 
   containing multiple shot gathers, the use of Dataset objects is recommended
-  (see Example/MASWavesPy_Dispersion_test2).
+  (see examples/MASWavesPy_Dispersion_test2).
 - Plot imported data.
 - Compute and view the dispersion image (phase velocity spectrum) of the 
   imported data.
