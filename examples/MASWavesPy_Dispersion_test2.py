@@ -7,7 +7,7 @@ This example covers the use of Dataset objects to:
 - Batch import multi-channel seismic data (shot gathers) from a .csv file.
 - Remove a record from an initiated Dataset object.
 - Add a record to an initiated Dataset object.
-- Process each shot gather stored within in the Dataset object and identify
+- Process each shot gather stored within the Dataset object and identify
   the corresponding elementary dispersion curve.
 - Return the set of identified dispersion curves as a dictionary.
 - Initiate a CombineDC object.
