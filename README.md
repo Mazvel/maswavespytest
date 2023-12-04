@@ -10,7 +10,7 @@ Wheels for Windows, Linux and Mac distributions can also be downloaded from [pyp
 
 We recommend to install the MASWavesPy package into an isolated Python environment. If using Anaconda, create a virtual environment using [conda](https://docs.conda.io/projects/conda/en/latest/commands/create.html). Alternatively, [virtualenv](https://docs.python.org/3/library/venv.html) can be used to install this package into an isolated Python environment. [Virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/) is a tool to simplify the creation and management of local virtualenvs.
 
-The use of Python IDE (Integrated Development Environment) is strongly recommended for using MASWavesPy (as opposed to running commands in the Windows terminal/cmd environment). 
+The use of a Python IDE (Integrated Development Environment) is strongly recommended for using MASWavesPy (as opposed to running commands in the Windows terminal/cmd environment). 
 
 MASWavesPy is developed using the [Anaconda distribution](https://www.anaconda.com/). Hence Anaconda and the Spyder IDE (included with Anaconda) are recommended for running the Quick Start guide below. 
 
@@ -31,10 +31,10 @@ This is required because the package uses Cython for some of its calculations.
 1. (If required) Download and install [Anaconda](https://www.anaconda.com/download).
 2. (If required) Install [Microsoft C++ Build Tools](https://visualstudio.microsoft.com/visual-cpp-build-tools/). The Microsoft C++ Build Tools are required for building the package on Windows.
 3. (Optional, recommended) Create a virtual environment to install the package into an isolated Python environment. A brief guide is provided below.
-   - Start Anaconda Prompt.
-   - Verify that conda is installed in your path by typing `conda -V`
-   - Navigate to the anaconda3 directory.
-   - Make sure that the newest version of conda is installed. Update conda by typing `conda update conda`.
+   - Start Anaconda Prompt from the Start menu.
+   - Verify that `conda` is installed in your path by typing `conda -V`
+   - Navigate to the `anaconda3` directory.
+   - Make sure that the newest version of `conda` is installed. Update conda by typing `conda update conda`.
    - Navigate back to the previous folder.
    - Get your python version (3.x.yy) by typing `python -V`.
    - Set up a virtual environment (here named `testenv`) and install the anaconda package to it by typing `conda create --name testenv python=3.x anaconda` (where 3.x is replaced by the python version that you have/want to use).
@@ -43,20 +43,20 @@ This is required because the package uses Cython for some of its calculations.
 
 ### Install MASWavesPy through Anaconda Prompt. 
 
-The package is installed using pip. See the documentation for pip for more information [link](https://pip.pypa.io/en/stable/).
+The package is installed using [pip](https://pip.pypa.io/en/stable/).
 1. (If required) Start Anaconda Prompt.
 2. Type `pip install maswavespy` to install the package.
 3. Check if the package has been successfully installed by inspecting the last lines that are displayed in the Anaconda Prompt console.
 
 ### Test MASWavesPy
 
-1. Download the contents of the [examples](https://github.com/Mazvel/maswavespytest/tree/main/examples) directory. Four example files to test different parts/commands of the MASWavesPy package are provided. The examples files use data from the [examples/Data](https://github.com/Mazvel/maswavespytest/tree/main/examples/Data) directory. Further information is provided in each file. 
-2. Launch Spyder (testenv) (i.e., Spyder (name of your virtual environment)).
+1. Download the contents of the [examples](https://github.com/Mazvel/maswavespytest/tree/main/examples) directory. Four example files to test different parts/commands of the MASWavesPy package are provided. The example files use data from the [examples/Data](https://github.com/Mazvel/maswavespytest/tree/main/examples/Data) directory. Further information is provided in each file. 
+2. Launch Spyder (testenv) from the Start menu (i.e., Spyder (name of your virtual environment)).
    - Please note that all four example files are written to be run one cell at a time using the keyboard shortcut (Ctrl+Enter), Run > Run cell, or the Run cell button in the toolbar.
-3. Open `MASWavesPy_Dispersion_test1.py` to test the basic methods of the maswavespy.wavefield and maswavespy.dispersion modules using a single data file.
-4. Open `MASWavesPy_Dispersion_test2.py` to test the methods of the maswavespy.wavefield and maswavespy.dispersion modules using a Dataset object.
-5. Open `MASWavesPy_Combination_test.py` to test the maswavespy.combination module.
-6. Open `MASWavesPy_Inversion_test.py` to test the maswavespy.inversion module.
+3. Open `MASWavesPy_Dispersion_test1.py` to test the basic methods of the `maswavespy.wavefield` and `maswavespy.dispersion` modules using a single data file.
+4. Open `MASWavesPy_Dispersion_test2.py` to test the methods of the `maswavespy.wavefield` and `maswavespy.dispersion` modules using a `Dataset` object.
+5. Open `MASWavesPy_Combination_test.py` to test the `maswavespy.combination` module.
+6. Open `MASWavesPy_Inversion_test.py` to test the `maswavespy.inversion` module.
 
 ### Deactivate the virtual environment (if a virtual environment has been created)
 
@@ -66,7 +66,7 @@ The package is installed using pip. See the documentation for pip for more infor
 
 ## Known Issues
 
-### Matplotlib shoulds use TkAgg on Mac
+### Matplotlib should use TkAgg on Mac
 
 MaswavesPy depends on matplotlib. If you are on mac you need to ensure matplotlib uses `TkAgg`. Below is a workaround that are used in our examples.
 
