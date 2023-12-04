@@ -13,31 +13,6 @@ This example covers the following:
 - Identify/pick dispersion curve based on spectral maxima (GUI application).
 - Return identified dispersion curve as a dictionary.
 
-
-The following packages are required:
-- numpy
-- cmath
-- matplotlib
-- obspy
-- tkinter
-- copy
-
-Please note that before start using MASWavesPy, it may be neccessary to compile 
-the provided pyx files (i.e., compile the cython code used to conduct the 
-dispersion processing). See further: http://docs.cython.org/en/stable/src/quickstart/build.html
-Please also note that both the provided pyx files must be compiled. 
-
-A setuptools setup.py is provided with the MASWavesPy package. It is recommended
-to use it to build the cython code. Note that running setup.py requires the following 
-packages:
-- distutils
-- Cython
-
-How to run setup.py:
-1) Open the terminal
-2) Navigate to the folder MASWavesPy_master
-3) Execute the following command: python maswavespy/setup.py build_ext --inplace
-
 """
 from sys import platform as sys_pf
 if sys_pf == 'darwin':
