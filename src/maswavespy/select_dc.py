@@ -479,7 +479,7 @@ class SelectDC(tk.Frame):
         # Print instructions
         start_message = ('Dispersion curve identification. \n'
             'The spectral maximum at each frequency is shown as a black dot on the dispersion image, each with its unique \n'
-            'Point ID (spectral maxima identification number). Show PointIDs by checking the checkbutton at the bottom of the window. \n \n'
+            'Point ID (spectral maxima identification number). To show PointIDs, check the box at the bottom of the window. \n \n'
             'The dispersion curve is extracted by selecting the relevant spectral maxima using their Point IDs (recommended). Press START (Pick dispersion curve using Point IDs) to commence. \n \n'
             'Additional points can be added to the identified dispersion curve by clicking on the dispersion image. \n'
             'Press START (Pick dispersion curve by clicking on the image) to commence.')
