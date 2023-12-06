@@ -17,6 +17,18 @@ Dispersion curve combination
    dispersion curves from MASW measurements. Soil Dynamics and Earthquake 
    Engineering 113: 473–487. https://doi.org/10.1016/j.soildyn.2018.05.025
 
+Input files (prepared):
+- Data/Oysand_c_list.txt (Set of elementary dispersion curves, phase velocity values [m/s])
+- Data/Oysand_f_list.txt (Set of elementary dispersion curves, frequency values [Hz])
+
+Outputs:
+- c_TestSite: Initialized CombineDCs object (type combination.CombineDCs).
+- Plot showing the imported experimental dispersion curves and the variation in COV with frequency. 
+- Composite dispersion curve, saved to the CombineDCs object c_TestSite.
+- Plot showing the composite DC (wavelength domain).
+- Resampled composite DC, saved to the CombineDCs object c_TestSite and as variables c_mean, c_low, c_up, and wavelengths.
+- Plot showing a resampled composite DC (computed curve resampled at 30 log-spaced points, wavelength domain).
+
 """
 from sys import platform as sys_pf
 if sys_pf == 'darwin':
@@ -39,6 +51,10 @@ with open(filename_f, 'r') as file_f:
     f_vec = [np.array([float(value) for value in line.split()]) for line in file_f]
 
 del file_c, file_f
+
+# Print message to user
+print('The sample dispersion data has been loaded.')
+
 #%%
 # Initialize a CombineDCs object
 site = 'Oysand'
@@ -48,12 +64,18 @@ c_TestSite = combination.CombineDCs(site, profile, f_vec, c_vec)
 # Please note that when working with datasets, a CombineDCs object for the dataset
 # can be initialized in a more convenient manner (see Examples/MASWavesPy_Dispersion_test2)
 
+# Print message to user
+print('A CombineDCs object has been initialized.')
+
 #%%
 # View the imported experimental DCs and evaluate the variation in DCs estimates
 # with frequency in terms of the coefficient of variation.
 binwidth = 0.1 # Width of frequency bins for computation of COV values
 c_TestSite.dc_cov()
 c_TestSite.plot_dc_cov()
+
+# Print message to user 
+print('The dispersion data (frequency domain) has been plotted.')
 
 #%%
 # Evaluate a compusite dispersion curve for the dataset following the 
@@ -76,6 +98,9 @@ no_std = 1 # Number of standard deviations.
 c_TestSite.dc_combination(a)
 c_TestSite.plot_combined_dc(plot_all=True)
 
+# Print message to user
+print('The composite dispersion curve (wavelength domain) has been plotted.')
+
 #%%
 # Resample the composite dispersion curve and its upper/lower boundary curves
 # at no_points logarithmically or linearly spaced points
@@ -91,3 +116,6 @@ c_mean = c_TestSite.resampled['c_mean']
 c_low = c_TestSite.resampled['c_low']
 c_up = c_TestSite.resampled['c_up']
 wavelengths = c_TestSite.resampled['wavelength']
+
+# Print message to user
+print('The resampled composite DC (wavelength domain) has been plotted.')
