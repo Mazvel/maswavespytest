@@ -13,6 +13,16 @@ This example covers the following:
 - Identify/pick dispersion curve based on spectral maxima (GUI application).
 - Return identified dispersion curve as a dictionary.
 
+Input file (prepared):
+- Data/Oysand_dx_2m_x1_30m_forward.dat (MASW shot gather)
+
+Outputs:
+- rec_TestSite: Initialized RecordMC object (type wavefield.RecordMC)
+- Plot showing the recorded wavefield
+- Plot showing the dispersion image of the recorded wavefield.
+- edc_TestSite: Initialized ElementDC object (type dispersion.ElementDC)
+- Picked elementary dispersion curve, saved to the ElementDC object edc_TestSite.
+
 """
 from sys import platform as sys_pf
 if sys_pf == 'darwin':
@@ -55,6 +65,10 @@ rec_TestSite = wavefield.RecordMC.import_from_textfile(site, profile, file_name,
 # Plot the recorded wavefield
 rec_TestSite.plot_data(du=0.75, normalized=False, filled=True)
 
+# Print message to user
+print('A multi-channel record containing ' + str(n) + ' traces has been imported as a RecordMC object from the file ' + file_name)
+print('The imported wavefield has been plotted.')
+
 #%%
 # Compute and view dispersion image of recorded wavefield
 # Create a elementary dispersion curve object
@@ -63,6 +77,10 @@ edc_TestSite = rec_TestSite.element_dc(cT_min, cT_max, cT_step)
 
 f_min = 0; f_max = 70
 edc_TestSite.plot_dispersion_image(f_min, f_max)
+
+# Print message to user
+print('An elementary dispersion curve object has been initialized.')
+print('The dispersion image of the imported wavefield has been plotted.')
 
 #%%
 # Identify elementary dispersion curves (DC) based on spectral maxima.
@@ -81,3 +99,8 @@ import matplotlib.pyplot as plt
 fig, ax = plt.subplots(1,1)
 ax.plot(edc_TestSite_dict['f0'], edc_TestSite_dict['c0'],'o'), ax.grid()
 ax.set_xlabel('Frequency [Hz]'), ax.set_ylabel('Phase velocity [m/s]')
+ax.set_xlim([f_min, f_max]), ax.set_ylim([cT_min, cT_max])
+
+# Print message to user
+print('The identified dispersion curve has been plotted.')
+
