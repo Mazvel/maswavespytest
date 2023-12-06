@@ -20,7 +20,7 @@ MASWavesPy (`maswavespy`) is a Python package for processing and inverting MASW 
 
 ## About MASWavesPy
 
-The MASWavesPy package consists of four primary modules: `wavefield`, `dispersion`, `combination` and `inversion`, and two supplementary modules: `dataset` and `select_dc`. 
+The `maswavespy` package consists of four primary modules: `wavefield`, `dispersion`, `combination` and `inversion`, and two supplementary modules: `dataset` and `select_dc`. 
 
 The `wavefield` module provides methods to import recorded shot gathers as `RecordMC` objects. The phase shift method (1) is used to transform each shot gather into the frequency-phase velocity domain. The `dataset` module can be used to import a set of shot gathers in the form of a `Dataset` object through a .csv file. 
 
@@ -30,10 +30,10 @@ The `combination` module provides methods to combine elementary DCs obtained fro
 
 The `inversion` module provides methods to evaluate the shear wave velocity profile of the tested site. The inversion methods, along with routines for post-processing of the inversion results, are defined on an `InvertDC` object that is initialized using an experimental DC. The fast delta matrix algorithm (3) is used for forward computations and a Monte-Carlo global search algorithm (4) for searching the solution space for the optimal set of model parameters. 
 
-A more comprehensive description of MASWavesPy is provided in (5). 
+A more comprehensive description is provided in (5). 
 
 ### Referencing MASWavesPy
-Referencing the MASWavesPy software and a paper related to its development is highly appreciated. 
+Referencing the MASWavesPy package and a paper related to its development is highly appreciated. 
 
 > Olafsdottir, E.A., Bessason, B., Erlingsson, S., Kaynia, A.M. A Tool for Processing and Inversion of MASW Data and a Study of Inter-Session Variability of MASW. Submitted to _Geotechnical Testing Journal_ (in review).
 
