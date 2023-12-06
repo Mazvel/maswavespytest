@@ -126,7 +126,7 @@ Applies if a virtual environment has been created.
 1. (If required) Close the Spyder IDE.
 2. (If required) Start Anaconda Prompt.
 3. Close the virtual environment `testenv` by typing `conda deactivate`.
-4. If required, the virtual environment `testenv` can be deleted with the following command `conda remove --name testenv -all`.
+4. If required, the virtual environment `testenv` can be deleted with the following command `conda remove --name testenv --all`.
 
 ## Known Issues
 
