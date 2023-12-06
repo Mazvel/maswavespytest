@@ -418,8 +418,8 @@ class InvertDC():
             fig, ax = plt.subplots(1, 2, figsize=(s.cm_to_in(figwidth), s.cm_to_in(figheight)), constrained_layout=True)
             
             # Plot experimental dispersion curve
-            ax[0].plot(self.c_obs, self.wavelength,'-', color='k')
-            ax[0].plot(self.c_obs_low, self.wavelength, '--', color='k')
+            ax[0].plot(self.c_obs, self.wavelength,'-', color='k', label='Mean')
+            ax[0].plot(self.c_obs_low, self.wavelength, '--', color='k', label='Upper/lower')
             ax[0].plot(self.c_obs_up, self.wavelength, '--', color='k')
 
             ax[0].grid(color='gainsboro', linestyle=':')
@@ -439,13 +439,17 @@ class InvertDC():
             ax[1].invert_yaxis() 
             
         # Plot theoretical dispersion curve
-        ax[0].plot(c_t, self.wavelength, c=col)
+        ax[0].plot(c_t, self.wavelength, c=col, label='Theoretical')
         
         # Plot shear wave velocity profile
         beta_plot = self._beta_profile(initial['beta'])
         z_plot = self._h_to_z_profile(initial['h'], max_depth)
-        ax[1].plot(beta_plot, z_plot, c=col)
-    
+        ax[1].plot(beta_plot, z_plot, c=col, label='Initial Vs profile')
+
+        # Create legends
+        ax[0].legend(frameon=False)
+        ax[1].legend(frameon=False)
+                      
         # Print misfit value
         print(f'Misfit: {round(e,3)} %')
         
