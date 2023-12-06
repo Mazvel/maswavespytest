@@ -22,15 +22,21 @@ MASWavesPy (`maswavespy`) is a Python package for processing and inverting MASW 
 
 The MASWavesPy package consists of four primary modules: `wavefield`, `dispersion`, `combination` and `inversion`, and two supplementary modules: `dataset` and `select_dc`. 
 
-The `wavefield` module provides methods to import recorded shot gathers as `RecordMC` objects. The phase shift method[^1] is used to transform each shot gather into the frequency-phase velocity domain. The `dataset` module can be used to import a set of shot gathers in the form of a `Dataset` object through a .csv file. 
+The `wavefield` module provides methods to import recorded shot gathers as `RecordMC` objects. The phase shift method (1) is used to transform each shot gather into the frequency-phase velocity domain. The `dataset` module can be used to import a set of shot gathers in the form of a `Dataset` object through a .csv file. 
 
 The `dispersion` module, along with the supplementary `select_dc` module, provides methods for visualization of the phase velocity spectrum and dispersion curve (DC) identification using a GUI (Graphical User Interface). An `ElementDC` object stores the frequency-phase velocity domain representation of a given `RecordMC` and the corresponding DC (referred to as an elementary DC). 
 
-The `combination` module provides methods to combine elementary DCs obtained from multiple shot gathers into a composite DC[^2] (a `CombineDCs` object) and to assess and view the spread in the dispersion data, either as a function of frequency or wavelength. A `Dataset` object can contain multiple pairs of `RecordMC` and `ElementDC` objects (one pair for each shot gather) and provides routines for initializing a `CombineDCs` for the set of records or a particular subset of records. 
+The `combination` module provides methods to combine elementary DCs obtained from multiple shot gathers into a composite DC (2) (a `CombineDCs` object) and to assess and view the spread in the dispersion data, either as a function of frequency or wavelength. A `Dataset` object can contain multiple pairs of `RecordMC` and `ElementDC` objects (one pair for each shot gather) and provides routines for initializing a `CombineDCs` for the set of records or a particular subset of records. 
 
-The `inversion` module provides methods to evaluate the shear wave velocity profile of the tested site. The inversion methods, along with routines for post-processing of the inversion results, are defined on an `InvertDC` object that is initialized using an experimental DC. The fast delta matrix algorithm[^3] is used for forward computations and a Monte-Carlo global search algorithm[^4] for searching the solution space for the optimal set of model parameters. 
+The `inversion` module provides methods to evaluate the shear wave velocity profile of the tested site. The inversion methods, along with routines for post-processing of the inversion results, are defined on an `InvertDC` object that is initialized using an experimental DC. The fast delta matrix algorithm (3) is used for forward computations and a Monte-Carlo global search algorithm (4) for searching the solution space for the optimal set of model parameters. 
 
-A more comprehensive description of MASWavesPy is provided in[^5] 
+A more comprehensive description of MASWavesPy is provided in (5). 
+
+> (1): Park, C.B., Miller, R.D., Xia, J. (1998). Imaging dispersion curves of surface waves on multi-channel record. In _SEG Technical Program Expanded Abstracts 1998_, New Orleans, Louisiana, pp. 1377–1380. [https://doi.org/10.1190/1.1820161](https://doi.org/10.1190/1.1820161)
+> (2): Olafsdottir, E.A., Bessason, B., Erlingsson, S. (2018a). Combination of dispersion curves from MASW measurements. _Soil Dynamics and Earthquake Engineering_, 113, pp. 473–487. [https://doi.org/10.1016/j.soildyn.2018.05.025](https://doi.org/10.1016/j.soildyn.2018.05.025)
+> (3): Buchen, P.W., Ben-Hador, R. (1996). Free-mode surface-wave computations. _Geophysical Journal International_, 124(3), pp. 869–887. [https://doi.org/10.1111/j.1365-246X.1996.tb05642.x](https://doi.org/10.1111/j.1365-246X.1996.tb05642.x)
+> (4): Olafsdottir, E.A., Erlingsson, S., Bessason, B. (2020). Open-Source MASW Inversion Tool Aimed at Shear Wave Velocity Profiling for Soil Site Explorations, _Geosciences_, 10(8), 322. [https://doi.org/10.3390/geosciences10080322](https://doi.org/10.3390/geosciences10080322)
+> (5): Olafsdottir, E.A., Bessason, B., Erlingsson, S., Kaynia, A.M. A Tool for Processing and Inversion of MASW Data and a Study of Inter-Session Variability of MASW. Submitted to _Geotechnical Testing Journal_ (in review).
 
 ### Referencing MASWavesPy
 Referencing the MASWavesPy software and a paper related to its development is highly appreciated. 
@@ -46,12 +52,6 @@ You should have received a copy of the GNU General Public License along with thi
 
 ### Acknowledgements
 This work was supported by the Icelandic Research Fund [grant numbers 206793-052 and 218149-051], the University of Iceland Research Fund, the Icelandic Road and Coastal Administration and the Energy Research Fund of the National Power Company of Iceland.
-
-[^1]: Park, C.B., Miller, R.D., Xia, J. (1998). Imaging dispersion curves of surface waves on multi-channel record. In _SEG Technical Program Expanded Abstracts 1998_, New Orleans, Louisiana, pp. 1377–1380. [https://doi.org/10.1190/1.1820161](https://doi.org/10.1190/1.1820161)
-[^2]: Olafsdottir, E.A., Bessason, B., Erlingsson, S. (2018a). Combination of dispersion curves from MASW measurements. _Soil Dynamics and Earthquake Engineering_, 113, pp. 473–487. [https://doi.org/10.1016/j.soildyn.2018.05.025](https://doi.org/10.1016/j.soildyn.2018.05.025)
-[^3]: Buchen, P.W., Ben-Hador, R. (1996). Free-mode surface-wave computations. _Geophysical Journal International_, 124(3), pp. 869–887. [https://doi.org/10.1111/j.1365-246X.1996.tb05642.x](https://doi.org/10.1111/j.1365-246X.1996.tb05642.x)
-[^4]: Olafsdottir, E.A., Erlingsson, S., Bessason, B. (2020). Open-Source MASW Inversion Tool Aimed at Shear Wave Velocity Profiling for Soil Site Explorations, _Geosciences_, 10(8), 322. [https://doi.org/10.3390/geosciences10080322](https://doi.org/10.3390/geosciences10080322)
-[^5]: Olafsdottir, E.A., Bessason, B., Erlingsson, S., Kaynia, A.M. A Tool for Processing and Inversion of MASW Data and a Study of Inter-Session Variability of MASW. Submitted to _Geotechnical Testing Journal_ (in review).
 
 ## Installation
 A [Quick Start Guide](#quick-start-guide) describing the recommended workflow for Windows users is provided.
