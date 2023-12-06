@@ -53,7 +53,7 @@ with open(filename_f, 'r') as file_f:
 del file_c, file_f
 
 # Print message to user
-print('The sample dispersion data has been loaded.')
+print('The sample dispersion data has been imported.')
 
 #%%
 # Initialize a CombineDCs object
