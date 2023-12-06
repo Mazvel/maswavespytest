@@ -215,10 +215,10 @@ for no in range(-1*no_profiles_checked,0):
     profile_dict = {'beta': inv_TestSite.selected['beta'][no], 'z': inv_TestSite.selected['z'][no]}
     if no == -1*no_profiles_checked:
         fig, ax = inv_TestSite.plot_profile(profile_dict, max_depth, c_test, initial, col='gray', 
-                              up_low=False, DC_yaxis='linear', fig=None, ax=None, return_axes=True)
+                              up_low=False, DC_yaxis='linear', fig=None, ax=None, return_axes=True, show_legend=True)
     else:
         inv_TestSite.plot_profile(profile_dict, max_depth, c_test, initial, col='gray', 
-                              up_low=False, DC_yaxis='linear', fig=fig, ax=ax)
+                              up_low=False, DC_yaxis='linear', fig=fig, ax=ax, show_legend=False)
     lowest_misfit_profiles[no] = profile_dict
 
 # Print message to user
