@@ -24,18 +24,22 @@ Input files (prepared):
 
 Outputs:
 - inv_TestSite: Initialized inversion object (type inversion.InvertDC).
-- Plot showing the initial shear wave velocity profile (Vs) and comparing the corresponding 
-  theoretical dispersion curve to the experimental data.
+- Plot showing the initial shear wave velocity (Vs) profile and comparing the 
+  corresponding theoretical dispersion curve (DC) to the experimental data.
 - Set of sampled Vs profiles and corresponding theoretical DCs, saved to the InvertDC object inv_TestSite.
 - Plot showing sampled Vs profiles and corresponding theoretical DCs. 
 - InvertDC object inv_TestSite saved to disk using Python's Pickle module.
 - Plot showing accepted Vs profiles and corresponding theoretical DCs. 
-- TestSite_median_profile: Median of accepted Vs profiles.
-- lowest_misfit_profiles: Set of 'no_profiles' lowest-misfit Vs profiles retrieved in the inversion.
-- Time-averaged Vs (Vsz) values computed for z=5, z=10 m, z=20 m and z=30 m.
-  Stored in
-  - Vsz_median: Vsz estimated from median Vs profile.
-  - Vsz_lowest_misfit: Vsz estimated from lowest-misfit Vs profile.
+- TestSite_median_profile: Median and percentile values of the accepted Vs profiles (type dict).
+- Plot showing the median and percentile Vs values and comparing the theoretical DC of 
+  the median profile to the experimental data.
+- lowest_misfit_profiles: Set of 'no_profiles' lowest-misfit Vs profiles retrieved 
+  in the inversion (type dict).
+- Plot showing the set of lowest-misfit Vs profiles and comparing the corresponding 
+  theoretical DCs to the experimental data.
+- Time-averaged Vs (Vsz) values computed for z=5 m, z=10 m, z=20 m and z=30 m.
+  - Vsz_median: Vsz computed from the median of the accepted Vs profile (type tuple).
+  - Vsz_lowest_misfit: Vsz computed from the lowest-misfit Vs profile (type tuple).
   
 References
 ----------
@@ -92,11 +96,18 @@ for item in range(len(initial_parameters['saturated/unsaturated'].values)):
         Vp.append(initial_parameters['Vp [m/s]'].values[item])
 Vp = np.array(Vp, dtype='float64')
 
+# Print message to user
+print('The sample dispersion curve has been imported.')
+print('The initial soil model parameters have been imported.')
+
 #%%
 # Initialize an inversion object.    
 site = 'Oysand'
 profile = 'P1'
 inv_TestSite = inversion.InvertDC(site, profile, c_mean, c_low, c_up, wavelengths)
+
+# Print message to user
+print('An inversion (InvertDC) object has been initialized.') 
 
 #%%
 # Initialize the inversion routine. The inversion is conducted using 
@@ -133,18 +144,29 @@ max_depth = 16.5
 inv_TestSite.view_initial(initial, max_depth, c_test, col='crimson', DC_yaxis='linear', 
                  fig=None, ax=None, figwidth=16, figheight=12, return_ct=False)
 
+# Print message to user
+print('The initial estimate of the Vs profile and the corresponding theoretical DC have been plotted.')
+
 #%%
 # Start the inversion analysis (optimization) process.
+print('Inversion initiated.')
 inv_TestSite.mc_inversion(c_test, initial, settings)
 
 # Plot sampled Vs profiles and associated dispersion curves
 inv_TestSite.plot_sampled(max_depth, runs='all', figwidth=16, figheight=12, col_map='viridis', 
                   colorbar=True, DC_yaxis='linear', return_axes=False, show_exp_dc=True)
 
+# Print message to user
+print('All runs completed.')
+print('The sampled Vs profiles and the corresponding theoretical DCs have been plotted.')
+
 #%%
 # Pickle the inversion object
 file = 'Oysand_inversion'
 inv_TestSite.save_to_pickle(file)
+
+# Print message to user
+print('The InvertDC object has been saved to disk as '+ file+'.p using pickle.')
 
 #%%
 # Post-processing 
@@ -153,6 +175,9 @@ inv_TestSite.save_to_pickle(file)
 # boundaries defined by c_low and c_up at all wavelengths
 inv_TestSite.plot_within_boundaries(max_depth, show_all=True, runs='all', figwidth=16, figheight=12, 
                            col_map='viridis', colorbar=True, DC_yaxis='linear', return_axes=False)
+
+# Print message to user
+print('The set of accepted Vs profiles and the corresponding theoretical DCs have been plotted.')
 
 #%%
 # Post-processing 
@@ -170,6 +195,10 @@ TestSite_median_profile = inv_TestSite.median_profile(q=percentiles, dataset='se
 fig, ax = inv_TestSite.plot_profile(TestSite_median_profile, max_depth, c_test, initial, 
                                     col='red', up_low=True, fig=None, ax=None, 
                                     return_axes=True, return_ct=False)
+
+# Print message to user
+print('The median of accepted Vs profiles has been computed.')
+print('The median profile and the corresponding theoretical DC have been plotted.')
 
 #%%
 # Post-processing 
@@ -192,7 +221,10 @@ for no in range(-1*no_profiles_checked,0):
                               up_low=False, DC_yaxis='linear', fig=fig, ax=ax)
     lowest_misfit_profiles[no] = profile_dict
 
-    
+# Print message to user
+print('The ' + str(no_profiles) + ' lowest-misfit Vs profiles have been identified.')
+print('The set of lowest-misfit profiles and the corresponding theoretical DCs have been plotted')
+
 #%%
 # Post-processing 
 #
@@ -215,4 +247,3 @@ Vsz_lowest_misfit = inv_TestSite.compute_vsz(depth, inv_TestSite.selected['beta'
 print('Lowest-misfit Vs profile, z and Vsz values')
 print(Vsz_lowest_misfit[0]) # Depths (z)
 print([round(val, 2) for val in Vsz_lowest_misfit[1]]) # Computed Vsz values
-
