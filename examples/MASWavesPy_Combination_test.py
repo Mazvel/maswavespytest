@@ -10,13 +10,6 @@ This example covers the use of CombineDCs objects to:
   procedure described in Olafsdottir et al. (2018).
 - Resample composite experimental dispersion curves.
 
-References
-----------
-Dispersion curve combination
- - Olafsdottir, E.A., Bessason, B. and Erlingsson, S. (2018b). Combination of 
-   dispersion curves from MASW measurements. Soil Dynamics and Earthquake 
-   Engineering 113: 473–487. https://doi.org/10.1016/j.soildyn.2018.05.025
-
 Input files (prepared):
 - Data/Oysand_c_list.txt (Set of elementary dispersion curves, phase velocity values [m/s])
 - Data/Oysand_f_list.txt (Set of elementary dispersion curves, frequency values [Hz])
@@ -28,6 +21,13 @@ Outputs:
 - Plot showing the composite DC (wavelength domain).
 - Resampled composite DC, saved to the CombineDCs object c_TestSite and as variables c_mean, c_low, c_up, and wavelengths.
 - Plot showing a resampled composite DC (computed curve resampled at 30 log-spaced points, wavelength domain).
+
+References
+----------
+Dispersion curve combination
+ - Olafsdottir, E.A., Bessason, B. and Erlingsson, S. (2018b). Combination of 
+   dispersion curves from MASW measurements. Soil Dynamics and Earthquake 
+   Engineering 113: 473–487. https://doi.org/10.1016/j.soildyn.2018.05.025
 
 """
 from sys import platform as sys_pf
