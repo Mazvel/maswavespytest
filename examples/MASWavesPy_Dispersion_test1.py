@@ -17,11 +17,12 @@ Input file (prepared):
 - Data/Oysand_dx_2m_x1_30m_forward.dat (MASW shot gather)
 
 Outputs:
-- rec_TestSite: Initialized RecordMC object (type wavefield.RecordMC)
-- Plot showing the recorded wavefield
+- rec_TestSite: Initialized RecordMC object (type wavefield.RecordMC).
+- Plot showing the imported wavefield.
 - Plot showing the dispersion image of the recorded wavefield.
-- edc_TestSite: Initialized ElementDC object (type dispersion.ElementDC)
+- edc_TestSite: Initialized ElementDC object (type dispersion.ElementDC).
 - Picked elementary dispersion curve, saved to the ElementDC object edc_TestSite.
+- Plot showing the identified elementary dispersion curve.
 
 """
 from sys import platform as sys_pf
