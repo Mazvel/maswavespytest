@@ -17,7 +17,26 @@ This example covers the use of InvertDC objects to:
   - Identify the 10 lowest-misfit shear wave velocity profiles whose associated
     dispersion curves fall within the boundaries of the experimental data.
   - Compute the time-averaged shear wave velocity down to a depth z. 
-    
+
+Input files (prepared):
+- Data/Oysand_dc.txt (Experimental dispersion curve with upper/lower boundary curves)
+- Data/Oysand_initial.csv (Initial values for soil model parameters for use in inversion)
+
+Outputs:
+- inv_TestSite: Initialized inversion object (type inversion.InvertDC).
+- Plot showing the initial shear wave velocity profile (Vs) and comparing the corresponding 
+  theoretical dispersion curve to the experimental data.
+- Set of sampled Vs profiles and corresponding theoretical DCs, saved to the InvertDC object inv_TestSite.
+- Plot showing sampled Vs profiles and corresponding theoretical DCs. 
+- InvertDC object inv_TestSite saved to disk using Python's Pickle module.
+- Plot showing accepted Vs profiles and corresponding theoretical DCs. 
+- TestSite_median_profile: Median of accepted Vs profiles.
+- lowest_misfit_profiles: Set of 'no_profiles' lowest-misfit Vs profiles retrieved in the inversion.
+- Time-averaged Vs (Vsz) values computed for z=5, z=10 m, z=20 m and z=30 m.
+  Stored in
+  - Vsz_median: Vsz estimated from median Vs profile.
+  - Vsz_lowest_misfit: Vsz estimated from lowest-misfit Vs profile.
+  
 References
 ----------
 Fast delta matrix algorithm
