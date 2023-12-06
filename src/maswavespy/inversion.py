@@ -1527,7 +1527,7 @@ class InvertDC():
 
     
     def plot_profile(self, profile, max_depth, c_test, initial, col='crimson', up_low=False, DC_yaxis='linear', 
-                     fig=None, ax=None, return_axes=False, return_ct=False, figwidth=16, figheight=12):
+                     fig=None, ax=None, return_axes=False, return_ct=False, show_legend=True, figwidth=16, figheight=12):
         
         """
         Plot the median or mean shear wave velocity profile. The associated 
@@ -1587,6 +1587,10 @@ class InvertDC():
             If return_ct is True, the theoretical dispersion curve associated
             with the median or mean shear wave velocity profile is returned. 
             Default is return_ct=False.
+        show_legend : boolean, optional
+            If show_legend is True, a legend is placed on the left-hand axis 
+            of the plot (i.e., the subplot showing the dispersion curves).
+            Default is show_legend=True.
         figwidth : int or float, optional
             Width of figure in centimeters [cm].
             Default is figwidth=16. 
@@ -1626,8 +1630,8 @@ class InvertDC():
             fig, ax = plt.subplots(1, 2, figsize=(s.cm_to_in(figwidth), s.cm_to_in(figheight)), constrained_layout=True)
             
             # Plot experimental dispersion curve
-            ax[0].plot(self.c_obs, self.wavelength,'-',color='k')
-            ax[0].plot(self.c_obs_low, self.wavelength, '--', color='k')
+            ax[0].plot(self.c_obs, self.wavelength,'-',color='k', label='Mean')
+            ax[0].plot(self.c_obs_low, self.wavelength, '--', color='k', label='Upper/lower')
             ax[0].plot(self.c_obs_up, self.wavelength, '--', color='k')
 
             ax[0].grid(color='gainsboro', linestyle=':')
@@ -1650,7 +1654,7 @@ class InvertDC():
             ax[1].invert_yaxis() 
                      
         # Plot theoretical dispersion curve
-        ax[0].plot(c_t, self.wavelength, c=col)
+        ax[0].plot(c_t, self.wavelength, c=col, label='Theoretical')
                 
         # Plot shear wave velocity profile (central values)
         beta_plot = self._beta_profile(beta)
@@ -1671,7 +1675,7 @@ class InvertDC():
             beta_error_up = [profile['beta_up'][i] - beta[i] for i in range(n+1)]
             beta_error_low = [beta[i] - profile['beta_low'][i] for i in range(n+1)]
             ax[1].errorbar(beta, beta_error_ydata, xerr=[beta_error_low,beta_error_up], c=col, barsabove=True, 
-              ls='none', fmt='.', capsize=3, label='Percentiles')
+              ls='none', fmt='.', capsize=3)
 
         # Figure appearance
         fig.set_size_inches(s.cm_to_in(figwidth), s.cm_to_in(figheight))    
@@ -1684,6 +1688,10 @@ class InvertDC():
             ax[0].set_yscale('linear')
             warnings.warn('Scale of wavelength axis (DC_yaxis) not recognized. Dispersion curves displayed on a linear wavelength scale (default setting).')
 
+        # Create legend
+        if show_legend:
+            ax[0].legend(frameon=False)
+         
         if return_axes:
             return fig, ax
         
