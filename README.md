@@ -150,3 +150,21 @@ if sys_pf == 'darwin':
 On mac you might run into `ModuleNotFoundError: No module named '_tkinter'` error, even after successfully installing `maswavespy` that has [Tkinter](https://docs.python.org/3/library/tkinter.html) as one of its listed dependencies. This might be because your python3 installation did not have Tkinter correctly set up. Below is an example of how it can be installed with brew.
 
 `brew install python-tk`
+
+### blosc2~=2.0.0 not installed
+
+When installing `maswavespy` into the Anaconda environment, you might encounter the following error, even though `maswavespy` is successfully installed.
+
+```
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+tables 3.8.0 requires blosc2~=2.0.0, which is not installed.
+```
+
+The `maswavespy` package does not require [`blosc2 2.0.0`](https://pypi.org/project/blosc2/2.0.0/). Therefore, this error message can be ignored. 
+
+The error can be prevented by installing [`Cython`](http://www.cython.org/) (required for installing `blosc2 2.0.0`) and `blosc2 2.0.0` prior to installing  `maswavespy`. Below is an example of how these two packages can be installed
+
+```
+conda install -c conda-forge cython
+pip install blosc2==2.0.0
+```
