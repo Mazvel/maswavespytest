@@ -166,7 +166,7 @@ file = 'Oysand_inversion'
 inv_TestSite.save_to_pickle(file)
 
 # Print message to user
-print('The InvertDC object has been saved to disk as '+ file+'.p using pickle.')
+print('The InvertDC object has been saved to disk as ' + file + '.p using pickle.')
 
 #%%
 # Post-processing 
