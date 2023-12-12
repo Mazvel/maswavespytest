@@ -74,6 +74,7 @@ record_id_to_delete = 'r4'
 TestSite.delete_record(record_id_to_delete)
 
 # Print message to user
+print('Record ' + str(record_id_to_delete) + ' has been removed from the database.')
 print('IDs of records in the database:')
 print(TestSite.records.keys())
 
@@ -89,6 +90,7 @@ fs = 1000             # Sampling frequency [Hz]
 TestSite.add_from_textfile(record_id_to_add, file_name, header_lines, n, direction, dx, x1)
 
 # Print message to user
+print('Record ' + str(record_id_to_add) + ' has been added to the database.')
 print('IDs of records in the database:')
 print(TestSite.records.keys())
 
@@ -149,4 +151,4 @@ saveas_filename = 'Oysand_example_dataset'
 TestSite.save_to_pickle(saveas_filename)
 
 # Print message to user
-print('The Dataset object has been saved to disk as '+ saveas_filename+'.p using pickle.')
+print('The Dataset object has been saved to disk as ' + saveas_filename + '.p using pickle.')
