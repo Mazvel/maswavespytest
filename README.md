@@ -64,9 +64,11 @@ A [Quick Start Guide](#quick-start-guide) describing the recommended workflow fo
 ### General installation using pip
 The MASWavesPy package is installed using pip. 
 
-`pip install maswavespy`
+`pip install --index-url https://test.pypi.org/simple --extra-index-url https://pypi.org/simple/ maswavespytest`
 
 Wheels for Windows, Linux and Mac distributions can also be downloaded from [pypi](https://test.pypi.org/project/maswavespytest/#files).
+
+Please note that on [PyPI](https://pypi.org/), the pip installation command will become `pip install maswavespy` and the package will be released as `maswavespy` version 1.0.0.
 
 ### Recommendations
 We recommend to install the MASWavesPy package into an isolated Python environment. If using Anaconda, create a virtual environment using [conda create](https://docs.conda.io/projects/conda/en/latest/commands/create.html). Alternatively, [virtualenv](https://docs.python.org/3/library/venv.html) can be used to install this package into an isolated Python environment. [Virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/) is a tool to simplify the creation and management of local virtualenvs.
@@ -107,7 +109,7 @@ This is required because the package uses [Cython](https://cython.org/) for some
 
 The package is installed using [pip](https://pip.pypa.io/en/stable/).
 1. (If required) Start Anaconda Prompt.
-2. Type `pip install maswavespy` to install the package.
+2. Type `pip install --index-url https://test.pypi.org/simple --extra-index-url https://pypi.org/simple/ maswavespytest` to install the package.
 3. Check if the package has been successfully installed by inspecting the last lines that are displayed in the Anaconda Prompt console.
 
 ### Test MASWavesPy
