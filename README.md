@@ -47,7 +47,6 @@ You should have received a copy of the GNU General Public License along with thi
 ### Acknowledgements
 This work was supported by the Icelandic Research Fund [grant numbers 206793-052 and 218149-051], the University of Iceland Research Fund, the Icelandic Road and Coastal Administration and the Energy Research Fund of the National Power Company of Iceland.
 
-
 > (1) Park, C.B., Miller, R.D., Xia, J. (1998). Imaging dispersion curves of surface waves on multi-channel record. In _SEG Technical Program Expanded Abstracts 1998_, New Orleans, Louisiana, pp. 1377–1380. [https://doi.org/10.1190/1.1820161](https://doi.org/10.1190/1.1820161)
 > 
 > (2) Olafsdottir, E.A., Bessason, B., Erlingsson, S. (2018a). Combination of dispersion curves from MASW measurements. _Soil Dynamics and Earthquake Engineering_, 113, pp. 473–487. [https://doi.org/10.1016/j.soildyn.2018.05.025](https://doi.org/10.1016/j.soildyn.2018.05.025)
@@ -59,16 +58,16 @@ This work was supported by the Icelandic Research Fund [grant numbers 206793-052
 > (5) Olafsdottir, E.A., Bessason, B., Erlingsson, S., Kaynia, A.M. A Tool for Processing and Inversion of MASW Data and a Study of Inter-Session Variability of MASW. Submitted to _Geotechnical Testing Journal_ (in review).
 
 ## Installation
-A [Quick Start Guide](#quick-start-guide) describing the recommended workflow for Windows users is provided.
+A [Quick Start Guide](#quick-start-guide) describing the recommended workflow for Windows users is provided below.
 
 ### General installation using pip
 The MASWavesPy package is installed using pip. 
 
 `pip install --index-url https://test.pypi.org/simple --extra-index-url https://pypi.org/simple/ maswavespytest`
 
-Wheels for Windows, Linux and Mac distributions can also be downloaded from [pypi](https://test.pypi.org/project/maswavespytest/#files).
+Wheels for Windows, Linux and Mac distributions can also be downloaded from [PyPI](https://test.pypi.org/project/maswavespytest/#files).
 
-Please note that on [PyPI](https://pypi.org/), the pip installation command will become `pip install maswavespy` and the package will be released as `maswavespy` version 1.0.0.
+Please note that the MASWavesPy package is currently provided through [TestPyPI](https://test.pypi.org/). On [PyPI](https://pypi.org/), the pip installation command will be changed to `pip install maswavespy` and the package will be released as `maswavespy version 1.0`.
 
 ### Recommendations
 We recommend to install the MASWavesPy package into an isolated Python environment. If using Anaconda, create a virtual environment using [conda create](https://docs.conda.io/projects/conda/en/latest/commands/create.html). Alternatively, [virtualenv](https://docs.python.org/3/library/venv.html) can be used to install this package into an isolated Python environment. [Virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/) is a tool to simplify the creation and management of local virtualenvs.
